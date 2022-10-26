@@ -13,6 +13,7 @@ using MatoAppSample.Authentication.JwtBearer;
 using MatoAppSample.Configuration;
 using MatoAppSample.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
+using MatoAppSample.Authorization.Users;
 
 namespace MatoAppSample
 {
@@ -48,6 +49,7 @@ namespace MatoAppSample
                  );
 
             ConfigureTokenAuth();
+            ConfigureExternalAuth();
         }
 
         private void ConfigureTokenAuth()
@@ -60,6 +62,12 @@ namespace MatoAppSample
             tokenAuthConfig.Audience = _appConfiguration["Authentication:JwtBearer:Audience"];
             tokenAuthConfig.SigningCredentials = new SigningCredentials(tokenAuthConfig.SecurityKey, SecurityAlgorithms.HmacSha256);
             tokenAuthConfig.Expiration = TimeSpan.FromDays(1);
+        }
+
+        private void ConfigureExternalAuth()
+        {
+            var userManagementConfig = IocManager.Resolve<IUserManagementConfig>();
+            userManagementConfig.ExternalAuthenticationSources.Add(typeof(PhoneNumberExternalAuthenticationSource));
         }
 
         public override void Initialize()

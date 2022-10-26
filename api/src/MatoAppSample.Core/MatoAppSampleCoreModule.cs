@@ -5,6 +5,7 @@ using Abp.Runtime.Security;
 using Abp.Timing;
 using Abp.Zero;
 using Abp.Zero.Configuration;
+using Aliyun.Sms;
 using MatoAppSample.Authorization.Roles;
 using MatoAppSample.Authorization.Users;
 using MatoAppSample.Configuration;
@@ -15,6 +16,7 @@ using MatoAppSample.Timing;
 namespace MatoAppSample
 {
     [DependsOn(typeof(AbpZeroCoreModule))]
+    [DependsOn(typeof(AliyunSmsModule))]
     public class MatoAppSampleCoreModule : AbpModule
     {
         public override void PreInitialize()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Abp.Authorization.Users;
 using Abp.Extensions;
 
@@ -13,6 +14,13 @@ namespace MatoAppSample.Authorization.Users
         {
             return Guid.NewGuid().ToString("N").Truncate(16);
         }
+
+        //override
+        public new const int MaxPhoneNumberLength = 11;
+
+        [Required]
+        [StringLength(MaxPhoneNumberLength)]
+        public override string PhoneNumber { get; set; }
 
         public static User CreateTenantAdminUser(int tenantId, string emailAddress)
         {

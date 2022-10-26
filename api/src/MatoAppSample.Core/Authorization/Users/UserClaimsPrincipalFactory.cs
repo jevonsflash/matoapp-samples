@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Abp.Authorization;
-using MatoAppSample.Authorization.Roles;
 using Abp.Domain.Uow;
+using MatoAppSample.Authorization.Roles;
 
 namespace MatoAppSample.Authorization.Users
 {
@@ -16,8 +16,7 @@ namespace MatoAppSample.Authorization.Users
             : base(
                   userManager,
                   roleManager,
-                  optionsAccessor,
-                  unitOfWorkManager)
+                  optionsAccessor, unitOfWorkManager)
         {
         }
     }

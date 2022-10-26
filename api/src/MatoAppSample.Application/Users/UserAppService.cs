@@ -246,6 +246,18 @@ namespace MatoAppSample.Users
 
             return true;
         }
+
+        public async Task<UserDto> GetCurrentUser()
+        {
+            if (_abpSession.UserId == null)
+            {
+                throw new UserFriendlyException("Please log in before attempting to get current user.");
+            }
+            var userid = _abpSession.UserId;
+            var currentUser = await GetAsync(new EntityDto<long>() { Id = (long)userid });
+            var currentUserInfoDto = ObjectMapper.Map<UserDto>(currentUser);
+            return currentUserInfoDto;
+        }
     }
 }
 

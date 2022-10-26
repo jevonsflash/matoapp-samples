@@ -1,0 +1,93 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MatoAppSample.Authorization.Consts
+{
+    public class OccupationType
+    {
+        public const string 国家机关_党群组织_企业_事业单位负责人 = "国家机关、党群组织、企业、事业单位负责人";
+        public const string 中国共产党中央委员会和地方各级组织负责人 = "中国共产党中央委员会和地方各级组织负责人";
+        public const string 国家机关及其工作机构负责人 = "国家机关及其工作机构负责人";
+        public const string 民主党派和社会团体及其工作机构负责人 = "民主党派和社会团体及其工作机构负责人";
+        public const string 事业单位负责人 = "事业单位负责人";
+        public const string 企业负责人 = "企业负责人";
+        public const string 人文_社会科学研究人员 = "人文、社会科学研究人员";
+        public const string 理工科学研究人员 = "理工科学研究人员";
+        public const string 工程技术人员 = "工程技术人员";
+        public const string 农业技术人员 = "农业技术人员";
+        public const string 飞机和船舶技术人员 = "飞机和船舶技术人员";
+        public const string 卫生专业技术人员 = "卫生专业技术人员";
+        public const string 西医医师 = "西医医师";
+        public const string 中医医师 = "中医医师";
+        public const string 中西医结合医师 = "中西医结合医师";
+        public const string 民族医师 = "民族医师";
+        public const string 公共卫生医师 = "公共卫生医师";
+        public const string 药剂人员 = "药剂人员";
+        public const string 医疗技术人员 = "医疗技术人员";
+        public const string 护理人员 = "护理人员";
+        public const string 其他卫生专业技术人员 = "其他卫生专业技术人员";
+        public const string 经济业务人员 = "经济业务人员";
+        public const string 金融业务人员 = "金融业务人员";
+        public const string 法律专业人员 = "法律专业人员";
+        public const string 教学人员 = "教学人员";
+        public const string 文学艺术工作人员 = "文学艺术工作人员";
+        public const string 体育工作人员 = "体育工作人员";
+        public const string 新闻出版_文化工作人员 = "新闻出版、文化工作人员";
+        public const string 宗教职业者 = "宗教职业者";
+        public const string 其他专业技术人员 = "其他专业技术人员";
+        public const string 办事人员和有关人员 = "办事人员和有关人员";
+        public const string 行政办公人员 = "行政办公人员";
+        public const string 安全保卫和消防人员 = "安全保卫和消防人员";
+        public const string 邮政和电信业务人员 = "邮政和电信业务人员";
+        public const string 其他办事人员和有关人员 = "其他办事人员和有关人员";
+        public const string 商业_服务业人员 = "商业、服务业人员";
+        public const string 购销人员 = "购销人员";
+        public const string 仓储人员 = "仓储人员";
+        public const string 餐饮服务人员 = "餐饮服务人员";
+        public const string 饭店_旅游及健身娱乐场所服务人员 = "饭店、旅游及健身娱乐场所服务人员";
+        public const string 运输服务人员 = "运输服务人员";
+        public const string 医疗卫生辅助服务人员 = "医疗卫生辅助服务人员";
+        public const string 社会服务和居民生活服务人员 = "社会服务和居民生活服务人员";
+        public const string 其他商业_服务业人员 = "其他商业、服务业人员";
+        public const string 农_林_牧_渔_水利业生产人员 = "农、林、牧、渔、水利业生产人员";
+        public const string 种植业生产人员 = "种植业生产人员";
+        public const string 林业生产及野生动植物保护人员 = "林业生产及野生动植物保护人员";
+        public const string 畜牧业生产人员 = "畜牧业生产人员";
+        public const string 渔业生产人员 = "渔业生产人员";
+        public const string 水利设施管理养护人员 = "水利设施管理养护人员";
+        public const string 其他农_林_牧_渔_水利业生产人员 = "其他农、林、牧、渔、水利业生产人员";
+        public const string 生产_运输设备操作人员及有关人员 = "生产、运输设备操作人员及有关人员";
+        public const string 勘探及矿物开采人员 = "勘探及矿物开采人员";
+        public const string 金属冶炼_轧制人员 = "金属冶炼、轧制人员";
+        public const string 化工产品生产人员 = "化工产品生产人员";
+        public const string 机械制造加工人员 = "机械制造加工人员";
+        public const string 机电产品装配人员 = "机电产品装配人员";
+        public const string 机械设备修理人员 = "机械设备修理人员";
+        public const string 电力设备安装_运行_检修及供点人员 = "电力设备安装、运行、检修及供点人员";
+        public const string 电子元器件与设备制造_装配_调试及维修人员 = "电子元器件与设备制造、装配、调试及维修人员";
+        public const string 橡胶和塑料制品生产人员 = "橡胶和塑料制品生产人员";
+        public const string 纺织_针织_印染人员 = "纺织、针织、印染人员";
+        public const string 裁剪_缝纫和皮革_毛皮制品加工制作人员 = "裁剪、缝纫和皮革、毛皮制品加工制作人员";
+        public const string 粮油_食品_饮料生产加工及饲料生产加工人员 = "粮油、食品、饮料生产加工及饲料生产加工人员";
+        public const string 烟草及其制品加工人员 = "烟草及其制品加工人员";
+        public const string 药品生产人员 = "药品生产人员";
+        public const string 木材加工_人造板生产_木制品制作及制浆_造纸和纸制品生产加工人员 = "木材加工、人造板生产、木制品制作及制浆、造纸和纸制品生产加工人员";
+        public const string 建筑材料生产_加工人员 = "建筑材料生产、加工人员";
+        public const string 玻璃_陶瓷_搪瓷及其制品生产加工人员 = "玻璃、陶瓷、搪瓷及其制品生产加工人员";
+        public const string 广播影视制品制作_播放及文物保护作业人员 = "广播影视制品制作、播放及文物保护作业人员";
+        public const string 印刷人员 = "印刷人员";
+        public const string 工艺_美术品制作人员 = "工艺、美术品制作人员";
+        public const string 文化教育_体育用品制作人员 = "文化教育、体育用品制作人员";
+        public const string 工程施工人员 = "工程施工人员";
+        public const string 运输设备操作人员_及有关人员 = "运输设备操作人员 及有关人员";
+        public const string 环境监测与废物处理人员 = "环境监测与废物处理人员";
+        public const string 检验_计量人员 = "检验、计量人员";
+        public const string 其他生产_运输设备操作人员及有关人员 = "其他生产、运输设备操作人员及有关人员";
+        public const string 军人 = "军人";
+        public const string 不便分类的其他从业人员 = "不便分类的其他从业人员";
+
+    }
+}
