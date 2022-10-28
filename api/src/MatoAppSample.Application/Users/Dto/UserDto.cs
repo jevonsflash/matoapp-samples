@@ -27,6 +27,10 @@ namespace MatoAppSample.Users.Dto
         [StringLength(AbpUserBase.MaxEmailAddressLength)]
         public string EmailAddress { get; set; }
 
+        [Required]
+        [StringLength(User.MaxPhoneNumberLength)]
+        public string PhoneNumber { get; set; }
+
         public bool IsActive { get; set; }
 
         public string FullName { get; set; }
@@ -36,5 +40,9 @@ namespace MatoAppSample.Users.Dto
         public DateTime CreationTime { get; set; }
 
         public string[] RoleNames { get; set; }
+
+        public bool IsPhoneNumberConfirmed { get; set; }
+
+
     }
 }

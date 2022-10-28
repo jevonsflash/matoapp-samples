@@ -6,6 +6,7 @@ using Abp.Dependency;
 using Abp.MultiTenancy;
 using MatoAppSample.Captcha;
 using MatoAppSample.Captcha.Consts;
+using MatoAppSample.Captcha.Sms;
 using MatoAppSample.Helper;
 using MatoAppSample.MultiTenancy;
 
@@ -14,9 +15,9 @@ namespace MatoAppSample.Authorization.Users
 
     public class PhoneNumberExternalAuthenticationSource : DefaultExternalAuthenticationSource<Tenant, User>, ITransientDependency
     {
-        private readonly CaptchaManager captchaManager;
+        private readonly SmsCaptchaManager captchaManager;
 
-        public PhoneNumberExternalAuthenticationSource(CaptchaManager captchaManager)
+        public PhoneNumberExternalAuthenticationSource(SmsCaptchaManager captchaManager)
         {
             this.captchaManager=captchaManager;
         }

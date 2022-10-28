@@ -17,7 +17,7 @@
   <ItemGroup>
     <PackageReference Include="Abp.AutoMapper" Version="7.3.0" />
     <PackageReference Include="Abp.ZeroCore.EntityFrameworkCore" Version="7.3.0" />
-    <PackageReference Include="AbpBoilerplate.Aliyun.Sms" Version="0.1.1" />
+    <PackageReference Include="AbpBoilerplate.Aliyun.Sms" Version="0.1.2" />
     <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.4.0" />
     <PackageReference Include="PinYinConverterCore" Version="1.0.2" />
   </ItemGroup>

@@ -85,7 +85,7 @@
                   登录
                 </el-button>
               </el-col>
-            </el-row>        
+            </el-row>
           </el-form>
         </el-tab-pane>
 
@@ -124,7 +124,7 @@
                 <el-button
                   slot="append"
                   :disabled="smsSendCd > 0"
-                  @click="gotoPhoneNumberVerify('LOGIN')"
+                  @click="sendVerificationCode(loginForm.username, 'LOGIN')"
                   >{{
                     smsSendCd == 0 ? "发送验证码" : smsSendCd + "后重试"
                   }}</el-button
@@ -135,7 +135,7 @@
             <el-row type="flex" class="row-bg" justify="center">
               <el-col :span="20">
                 <el-button
-                  :disabled="showVerify == null"
+                  :disabled="currentVerifyingType == null"
                   :loading="loading"
                   type="primary"
                   style="width: 100%"
@@ -177,7 +177,9 @@
           size="mini"
           type="primary"
           :disabled="smsSendCd > 0"
-          @click="gotoPhoneNumberVerify('BIND_PHONENUMBER')"
+          @click="
+            sendVerificationCode(userInfo.phoneNumber, 'BIND_PHONENUMBER')
+          "
           >{{ smsSendCd == 0 ? "验证手机号" : smsSendCd + "后重试" }}</el-button
         >
         <el-button
@@ -185,12 +187,14 @@
           size="mini"
           type="danger"
           :disabled="smsSendCd > 0"
-          @click="gotoPhoneNumberVerify('UNBIND_PHONENUMBER')"
+          @click="
+            sendVerificationCode(userInfo.phoneNumber, 'UNBIND_PHONENUMBER')
+          "
           >{{ smsSendCd == 0 ? "解绑手机号" : smsSendCd + "后重试" }}</el-button
         >
 
         <el-form-item
-          v-if="showVerify != null"
+          v-if="currentVerifyingType != null"
           :span="12"
           label="验证码"
           :required="true"
@@ -200,7 +204,7 @@
               slot="append"
               type="primary"
               size="mini"
-              @click="gotoVerify"
+              @click="verify"
             >
               完成验证</el-button
             >
@@ -227,22 +231,27 @@ export default {
       // host: "https://api.matoapp.net:3002/",
       host: "http://localhost:44311/",
       prefix: "api/services/app",
-      userInfo: null,
-      showVerify: null,
-      smsSendCd: 0,
-      activeName: "account",
-      loginForm: {
+      userInfo: null,                   //用户对象
+      currentVerifyingType: null,       //当前发送验证码的用途
+      smsSendCd: 0,                     //发送验证码的冷却时间，默认60s
+      activeName: "account",           
+      loginForm: {                      //登录对象
         username: "",
         password: "",
       },
       passwordType: "password",
       capsTooltip: false,
-      token: null,
-      verifyNumber: null,
+      token: null,                      //登录凭证Token
+      verifyNumber: null,               //填写的验证码
       timer: null,
     };
   },
-
+  created: async function () {
+    this.token = getToken();
+    if (this.token != null) {
+      await this.getCurrentUser();
+    }
+  },
   methods: {
     successMessage(value = "执行成功") {
       this.$notify({
@@ -257,10 +266,6 @@ export default {
         title: "错误",
         message: value,
       });
-    },
-
-    created() {
-      this.token = getToken();
     },
 
     showPwd() {
@@ -294,25 +299,7 @@ export default {
         .then(async (res) => {
           var data = res.data.result;
           setToken(data.accessToken);
-          await request(
-            `${this.host}${this.prefix}/User/GetCurrentUser`,
-            "get",
-            null
-          )
-            .catch((re) => {
-              var res = re.response.data;
-              this.errorMessage(res.error.message);
-            })
-            .then(async (re) => {
-              var result = re.data.result as any;
-              this.userInfo = result;
-              this.token = getToken();
-              clearInterval(this.timer);
-
-              this.smsSendCd = 0;
-
-              this.successMessage("登录成功");
-            });
+          await this.getCurrentUser();
         })
         .finally(() => {
           setTimeout(() => {
@@ -320,9 +307,31 @@ export default {
           }, 1.5 * 1000);
         });
     },
+    async getCurrentUser() {
+      await request(
+        `${this.host}${this.prefix}/User/GetCurrentUser`,
+        "get",
+        null
+      )
+        .catch((re) => {
+          var res = re.response.data;
+          this.errorMessage(res.error.message);
+        })
+        .then(async (re) => {
+          var result = re.data.result as any;
+          this.userInfo = result;
+          this.token = getToken();
+          clearInterval(this.timer);
 
-    async gotoPhoneNumberVerify(type) {
-      this.showVerify = type;
+          this.smsSendCd = 0;
+          this.currentVerifyingType = null;
+
+          this.successMessage("登录成功");
+        });
+    },
+
+    async sendVerificationCode(phoneNumber, type) {
+      this.currentVerifyingType = type;
       this.smsSendCd = 60;
       this.timer = setInterval(() => {
         this.smsSendCd--;
@@ -331,17 +340,18 @@ export default {
         }
       }, 1000);
       await request(`${this.host}${this.prefix}/Captcha/Send`, "post", {
-        phoneNumber: this.loginForm.username,
+        userId: this.userInfo == null ? null : this.userInfo.id,
+        phoneNumber: phoneNumber,
         type: type,
-      }).then((re) => {
-        var res = re.data.result;
-        if (res != null && res.bizId == null) {
-          this.errorMessage("发送失败:" + res.message);
-          // this.showVerify = null;
-        } else {
+      })
+        .catch((re) => {
+          var res = re.response.data;
+          this.errorMessage(res.error.message);
+        })
+        .then((re) => {
+          var res = re.data.result;
           this.successMessage("发送验证码成功");
-        }
-      });
+        });
     },
 
     logout() {
@@ -350,11 +360,11 @@ export default {
       this.userInfo = null;
     },
 
-    async gotoVerify() {
+    async verify() {
       var action = null;
-      if (this.showVerify == "BIND_PHONENUMBER") {
+      if (this.currentVerifyingType == "BIND_PHONENUMBER") {
         action = "Bind";
-      } else if (this.showVerify == "UNBIND_PHONENUMBER") {
+      } else if (this.currentVerifyingType == "UNBIND_PHONENUMBER") {
         action = "Unbind";
       } else {
         action = "Verify";
@@ -370,8 +380,8 @@ export default {
           var res = re.data;
           if (res.success) {
             this.successMessage("绑定成功");
-            this.refreshPage();
-          }
+            window.location.reload()   
+           }
         });
     },
   },

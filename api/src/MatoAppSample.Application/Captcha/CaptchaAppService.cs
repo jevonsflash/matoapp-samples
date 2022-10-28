@@ -1,34 +1,28 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Abp.Application.Services;
-using Aliyun.Sms.Models;
 using MatoAppSample.Authorization.Users;
 using MatoAppSample.Captcha.Dto;
+using MatoAppSample.Captcha.Sms;
 using Microsoft.AspNetCore.Mvc;
+using Sms.Interfaces;
 
 namespace MatoAppSample.Captcha
 {
     public class CaptchaAppService : ApplicationService
     {
-        private readonly CaptchaManager captchaManager;
+        private readonly SmsCaptchaManager captchaManager;
 
-        public CaptchaAppService(CaptchaManager captchaManager,
-            UserManager userManager
-            )
-
+        public CaptchaAppService(SmsCaptchaManager captchaManager)
         {
             this.captchaManager=captchaManager;
         }
 
-        public async Task<QuerySendDetailResponse> GetSendDetail(string phoneNumber)
-        {
-            return await captchaManager.GetSendDetail(phoneNumber, DateTime.Now);
-        }
 
         [HttpPost]
-        public async Task<SendSmsResponse> SendAsync(SendCaptchaInput input)
+        public async Task SendAsync(SendCaptchaInput input)
         {
-            return await captchaManager.SendCaptchaAsync(input.UserId, input.PhoneNumber, input.Type);
+            await captchaManager.SendCaptchaAsync(input.UserId, input.PhoneNumber, input.Type);
         }
 
 
@@ -41,14 +35,14 @@ namespace MatoAppSample.Captcha
         [HttpPost]
         public async Task UnbindAsync(VerifyCaptchaInput input)
         {
-            await captchaManager.UnbindPhoneNumberAsync(input.Token);
+            await captchaManager.UnbindAsync(input.Token);
 
         }
 
         [HttpPost]
         public async Task BindAsync(VerifyCaptchaInput input)
         {
-            await captchaManager.BindPhoneNumberAsync(input.Token);
+            await captchaManager.BindAsync(input.Token);
 
         }
     }

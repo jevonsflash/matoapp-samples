@@ -10,8 +10,6 @@ namespace MatoAppSample.Captcha.Cache
 
     public class CaptchaTokenCacheItem
     {
-        public string PhoneNumber { get; set; }
-
         public long UserId { get; set; }
 
         public string Purpose { get; set; }
