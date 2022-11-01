@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MatoAppSample.Migrator": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

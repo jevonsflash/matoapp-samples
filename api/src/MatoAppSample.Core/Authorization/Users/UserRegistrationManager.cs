@@ -52,7 +52,8 @@ namespace MatoAppSample.Authorization.Users
                 IsActive = true,
                 UserName = userName,
                 IsEmailConfirmed = isEmailConfirmed,
-                Roles = new List<UserRole>()
+                Roles = new List<UserRole>(),
+                PhoneNumber = ""
             };
 
             user.SetNormalizedNames();

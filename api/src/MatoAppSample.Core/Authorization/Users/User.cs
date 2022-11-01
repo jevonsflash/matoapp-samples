@@ -31,7 +31,8 @@ namespace MatoAppSample.Authorization.Users
                 Name = AdminUserName,
                 Surname = AdminUserName,
                 EmailAddress = emailAddress,
-                Roles = new List<UserRole>()
+                Roles = new List<UserRole>(),
+                PhoneNumber = ""
             };
 
             user.SetNormalizedNames();
