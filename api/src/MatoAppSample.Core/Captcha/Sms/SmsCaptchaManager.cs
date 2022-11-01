@@ -39,7 +39,7 @@ namespace MatoAppSample.Captcha.Sms
 
         }
 
-        public async Task SendCaptchaAsync(long userId, string phoneNumber, string purpose)
+        public async Task SendCaptchaAsync(long? userId, string phoneNumber, string purpose)
         {
             var captcha = CommonHelper.GetRandomCaptchaNumber();
             var model = new SendSmsRequest();
@@ -71,7 +71,7 @@ namespace MatoAppSample.Captcha.Sms
             await captchaTokenCache.SetAsync(captcha, new SmsCaptchaTokenCacheItem()
             {
                 PhoneNumber=phoneNumber,
-                UserId=userId,
+                UserId=userId.HasValue ? userId.Value : default,
                 Purpose=purpose
             }, absoluteExpireTime: DateTimeOffset.Now.Add(TokenCacheDuration));
         }

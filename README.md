@@ -1,32 +1,23 @@
 # abp-mp-auth
 
-![glimpse](https://raw.githubusercontent.com/jevonsflash/abp-mp-auth/master/assets/glimpse.gif)
+![glimpse](https://raw.githubusercontent.com/jevonsflash/matoapp-samples/master/assets/glimpse.png)
 
 
-搭建一套基于微信小程序登录的网站第三方登录模块
+搭建一套集成手机号免密登录验证与号码绑定功能的用户系统
 
 
 ## 开始
 
-1. 请在电脑浏览器打开 https://www.matoapp.net:3003/
-2. 使用微信扫描Web端的小程序码
-3. 等待微信小程序跳转至授权页面
-4. 点击授权登录按钮，完成登录
-5. 结果请在Web端查看
-
-
+1. 在电脑浏览器打开 https://www.matoapp.net:3009/
+2. 使用你的手机号码接收验证码
 
 ## 技术博客 
 
-本系列博文将从原理分析、设计到代码编写，搭建一套基于微信小程序登录的网站第三方登录模块：
+这是一篇系列博文，我将使用Abp.Zero搭建一套集成手机号免密登录验证与号码绑定功能的用户系统：
 
-[使用 Abp.Zero 搭建第三方登录模块（一）：原理篇](https://blog.csdn.net/jevonsflash/article/details/125432269).
-
-[使用 Abp.Zero 搭建第三方登录模块（二）：服务端开发](https://blog.csdn.net/jevonsflash/article/details/125441074).
-
-[使用 Abp.Zero 搭建第三方登录模块（三）：网页端开发](https://blog.csdn.net/jevonsflash/article/details/125870551).
-
-[使用 Abp.Zero 搭建第三方登录模块（四）：微信小程序开发](https://blog.csdn.net/jevonsflash/article/details/125872614).
+* [Abp.Zero 手机号免密登录验证与号码绑定功能的实现（一）：验证码模块](https://blog.csdn.net/jevonsflash/article/details/127538020)
+* [Abp.Zero 手机号免密登录验证与号码绑定功能的实现（二）：改造Abp默认实现](https://blog.csdn.net/jevonsflash/article/details/127576427)
+* [Abp.Zero 手机号免密登录验证与号码绑定功能的实现（三）：网页端开发](https://blog.csdn.net/jevonsflash/article/details/127576964)
 
 ## 本地运行
 
@@ -56,4 +47,4 @@ yarn serve
 ```
 ## 在线演示
 
-地址：https://www.matoapp.net:3003/
+地址：https://www.matoapp.net:3009/

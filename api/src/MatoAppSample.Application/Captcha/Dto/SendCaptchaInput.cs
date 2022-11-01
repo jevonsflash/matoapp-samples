@@ -6,7 +6,7 @@ namespace MatoAppSample.Captcha.Dto
 {
     public class SendCaptchaInput
     {
-        public long UserId { get; set; }
+        public long? UserId { get; set; }
 
         [Required]
         public string PhoneNumber { get; set; }

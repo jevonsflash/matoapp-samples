@@ -9,7 +9,7 @@ namespace MatoAppSample.Captcha
     {
         Task BindAsync(string token);
         Task UnbindAsync(string token);
-        Task SendCaptchaAsync(long userId, string phoneNumber, string purpose);
+        Task SendCaptchaAsync(long? userId, string phoneNumber, string purpose);
         Task<bool> VerifyCaptchaAsync(string token, string purpose = "IDENTITY_VERIFICATION");
     }
 }

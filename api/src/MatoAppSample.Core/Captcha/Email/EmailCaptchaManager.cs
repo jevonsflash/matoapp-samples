@@ -29,7 +29,7 @@ namespace MatoAppSample.Captcha.Email
 
         }
 
-        public async Task SendCaptchaAsync(long userId, string phoneNumber, string purpose)
+        public async Task SendCaptchaAsync(long? userId, string phoneNumber, string purpose)
         {
             throw new NotImplementedException();
         }
